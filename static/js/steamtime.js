@@ -1,3 +1,6 @@
+// STEAMTIME.JS
+
+// Calls functions for the /home page
 function steamtime() {
 	messageExists();
     showForm();
@@ -9,6 +12,7 @@ function steamtime() {
 	dontHave();
 }
 
+// Calls functions for the /results page
 function steamtimeResults(data_array, privacy) {
 	resultsFadeIn(privacy);
 	showSearch();
@@ -31,6 +35,7 @@ function steamtimeResults(data_array, privacy) {
 	rangeSelection(data_array);
 }
 
+// Displays tooltips on hover
 function tooltips() {
 	$("#list-selector").hover(function(){
 		timer = setTimeout(function() {
@@ -58,6 +63,25 @@ function tooltips() {
 	});
 }
 
+// Controls the initial animation for the /home page
+function initialFadeIn() {
+	$("#footer").css("display", "none");
+	setTimeout(function() {
+		$("#welcome-header").fadeIn("fast");
+	}, 100);
+	setTimeout(function() {
+		$("#big-logo").fadeIn("fast");
+	}, 500);
+	setTimeout(function() {
+		$("#slogan").fadeIn("fast");
+	}, 1000);
+	setTimeout(function() {
+		$("#buttons").fadeIn("fast");
+		$("#footer").fadeIn("fast");
+	}, 1600);
+}
+
+// Determines initial content/readout for users with privacy settings
 function resultsFadeIn(privacy) {
 	setTimeout(function() {
 		$("#header").fadeIn("fast");
@@ -75,6 +99,7 @@ function resultsFadeIn(privacy) {
 	}, 400);
 }
 
+// These functions determine what the graph icons initially display when clicked
 function initialSelections(data_array) {
 	$("#list-selector").click(function() {
 		showList_2weeks();
@@ -109,6 +134,7 @@ function initialSelectionsPrivacy(data_array) {
 	}, 400);	
 }
 
+// Add a little extra margin if there is an error message on the home page
 function messageExists() {
 	if ($(".message").length > 0) {
 		$("#welcome-header, #big-logo, #slogan, #buttons, #footer, #form").fadeIn("fast");		
@@ -119,23 +145,7 @@ function messageExists() {
 	};
 }
 
-function initialFadeIn() {
-	$("#footer").css("display", "none");
-	setTimeout(function() {
-		$("#welcome-header").fadeIn("fast");
-	}, 100);
-	setTimeout(function() {
-		$("#big-logo").fadeIn("fast");
-	}, 500);
-	setTimeout(function() {
-		$("#slogan").fadeIn("fast");
-	}, 1000);
-	setTimeout(function() {
-		$("#buttons").fadeIn("fast");
-		$("#footer").fadeIn("fast");
-	}, 1600);
-}
-
+// Fades in a hidden menu div once scrolled past a certain position
 function hiddenMenu() {
 	$(window).scroll(function() {
 		if ($(window).scrollTop() > 315) {
@@ -147,12 +157,14 @@ function hiddenMenu() {
 	});
 }
 
+// Smoothly return to top of page once icon is clicked
 function smoothTop() {
 	$("#top").click(function() {
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	});
 }
 
+// These functions fade in elements based on buttons being clicked
 function showForm() {
 	if ($(".message").length > 0) {
 		console.log("Blah");
@@ -204,48 +216,6 @@ function dontHave() {
 	});
 }
 
-function dimmer() {
-	$("#loading-dimmer").fadeIn("slow");
-	$("#loading").draggable();
-	setTimeout(function() {
-		$("#loading").animate({height : "200px"}, 500);
-		$("#text1").fadeIn("slow");
-	}, 6000);
-	setTimeout(function() {
-		$("#text1").fadeOut(1);
-		$("#text2").fadeIn("slow");
-	}, 14000);
-}
-
-function loading() {
-	$(".submit").click(function() {
-		dimmer();
-	});
-}
-
-function getFriendId() {
-	$(".friends").click(function () {
-		var alt = $(this).children(":first").attr("alt");
-		$("#hidden-steamid").val(alt);
-		$("#hidden-form").submit();
-		dimmer();
-	});
-}
-
-function privacyNotice() {
-	setTimeout(function() {
-		$("#privacy-dimmer").fadeIn("fast");
-		$("#privacy-alert").draggable();
-	}, 200);
-	closePrivacyNotice();
-}
-
-function closePrivacyNotice() {
-	$("#close-privacy").click(function() {
-		$("#privacy-dimmer").fadeOut("fast");
-	});
-}
-
 function showSearch() {
 	$("#search-select").click(function() {
 		$("#search-select").animate({"margin-bottom" : "15px"}, 100, function () {
@@ -271,6 +241,51 @@ function asterisk() {
 	});
 }
 
+// Controls fading in of the loading/privacy notification
+function dimmer() {
+	$("#loading-dimmer").fadeIn("slow");
+	$("#loading").draggable();
+	setTimeout(function() {
+		$("#loading").animate({height : "200px"}, 500);
+		$("#text1").fadeIn("slow");
+	}, 6000);
+	setTimeout(function() {
+		$("#text1").fadeOut(1);
+		$("#text2").fadeIn("slow");
+	}, 14000);
+}
+
+function loading() {
+	$(".submit").click(function() {
+		dimmer();
+	});
+}
+
+function privacyNotice() {
+	setTimeout(function() {
+		$("#privacy-dimmer").fadeIn("fast");
+		$("#privacy-alert").draggable();
+	}, 200);
+	closePrivacyNotice();
+}
+
+function closePrivacyNotice() {
+	$("#close-privacy").click(function() {
+		$("#privacy-dimmer").fadeOut("fast");
+	});
+}
+
+// Grabs SteamID (via alt attribute) for selected friend and submits to a hidden form
+function getFriendId() {
+	$(".friends").click(function () {
+		var alt = $(this).children(":first").attr("alt");
+		$("#hidden-steamid").val(alt);
+		$("#hidden-form").submit();
+		dimmer();
+	});
+}
+
+// Controls what the range selections in the .result-template div display
 function rangeSelection(data_array) {
 	$(".select_donut_2weeks").click(function (){
 		showDonut_2weeks(data_array[0]);
@@ -313,6 +328,36 @@ function rangeSelection(data_array) {
 	});	
 }
 
+// Displays Stats div/renders charts
+function showStats(data1, data2, breakdownData) {
+	$("#stats-tab").click(function() {
+		displayElements("#readout-stats", "#stats");
+		options = {animationSteps: 70, animationEasing: "easeOutExpo"};
+		options2 = {scaleFontColor: "#FFFFFF", scaleGridLineColor : "#FFFFFF"};
+		var ctx1 = $("#gen_stat_charts1").get(0).getContext("2d");
+		var ctx2 = $("#gen_stat_charts2").get(0).getContext("2d");
+		var ctx3 = $("#breakdown_chart").get(0).getContext("2d");
+		var myPieChart1 = new Chart(ctx1).Pie(data1, options);
+		var myPieChart2 = new Chart(ctx2).Pie(data2, options);
+		var myPieChart3 = new Chart(ctx3).Bar(breakdownData, options2);
+	});
+}
+
+// Displays Hall of Shame div
+function hallOfShame() {
+	$("#shame-tab").click(function() {
+		displayElements("#hall-of-shame-content", "#readout-shame");
+	});
+}
+
+// Displays Friends div
+function showFriends() {
+	$("#friends-tab").click(function() {
+		displayElements("#readout-friends", "#friends");
+	});
+}
+
+// Function to determine which content/readout divs to display
 function displayElements(fade1, fade2) {
     var elements = [
 	"#donut_2weeks", "#donut_10", "#donut_20", "#bar_2weeks",
@@ -336,33 +381,7 @@ function displayElements(fade1, fade2) {
 	$(fade2).fadeIn("slow");
 }
 
-
-function showStats(data1, data2, breakdownData) {
-	$("#stats-tab").click(function() {
-		displayElements("#readout-stats", "#stats");
-		options = {animationSteps: 70, animationEasing: "easeOutExpo"};
-		options2 = {scaleFontColor: "#FFFFFF", scaleGridLineColor : "#FFFFFF"};
-		var ctx1 = $("#gen_stat_charts1").get(0).getContext("2d");
-		var ctx2 = $("#gen_stat_charts2").get(0).getContext("2d");
-		var ctx3 = $("#breakdown_chart").get(0).getContext("2d");
-		var myPieChart1 = new Chart(ctx1).Pie(data1, options);
-		var myPieChart2 = new Chart(ctx2).Pie(data2, options);
-		var myPieChart3 = new Chart(ctx3).Bar(breakdownData, options2);
-	});
-}
-
-function hallOfShame() {
-	$("#shame-tab").click(function() {
-		displayElements("#hall-of-shame-content", "#readout-shame");
-	});
-}
-
-function showFriends() {
-	$("#friends-tab").click(function() {
-		displayElements("#readout-friends", "#friends");
-	});
-}
-
+// These functions call displayElements based on what icon/range has been clicked
 function showDonut_2weeks(data) {
 	displayElements("#readout_2weeks", "#donut_2weeks");
 	options = {animationSteps: 70, animationEasing: "easeOutExpo"};
@@ -443,6 +462,7 @@ function showList_all() {
 	displayElements("#readout_all", "#data_all");
 }
 
+// These functions add a 'selected' class to icons that have been clicked
 function tabSelect() {
 	$("#stats-tab").click(function() {
 		$(this).addClass("tab-selected");

@@ -4,9 +4,9 @@
             <i id="close" class="fa fa-times fa-2x animate"></i>
 
             <div id="github-links">
-                <i class="fa fa-github fa-2x"></i>
+                <a href="https://github.com/kershner/steamtime"><i class="fa fa-github fa-2x animate"></i></a>
                 <h5>Direct Links</h5>
-                <a href="#" class="animate">Python</a> | <a href="#" class="animate">JavaScript</a> | <a href="#" class="animate">HTML/CSS</a>
+                <a href="https://github.com/kershner/steamtime/blob/master/routes.py" class="animate">Python</a> | <a href="https://github.com/kershner/steamtime/blob/master/static/js/steamtime.js" class="animate">JavaScript</a> | <a href="https://github.com/kershner/steamtime/tree/master/templates" class="animate">HTML</a> | <a href="https://github.com/kershner/steamtime/blob/master/static/style.css" class="animate">CSS</a>
             </div>
 
             <br>
@@ -33,7 +33,7 @@
                 numerical SteamID, as this will determine which Steam API URL is needed.<br><br>
                 The correct URL is then queried by the Python code and a giant jumble
                 of data is returned in the form of a <a href="http://en.wikipedia.org/wiki/JSON" class="animate">JSON</a> object.
-                More Python gets to work parsing out the bits of data that have been requested by the user.
+                More Python gets to work parsing out the bits of data required by the individual pieces of SteamTime.
                 The list of games is sorted by the 'hours played' column and is packaged up with other variables collected
                 during the JSON parsing and are ready to be pushed to the client, your browser.<br><br>
             </p>
@@ -50,11 +50,11 @@
             <p>
                 Once the JSON object is nicely sorted there is one final step before everything is ready to be
                 displayed on the page.  SteamTime makes use of an excellent JavaScript library called <a href="http://www.chartjs.org/" class="animate">Charts.js</a>.
-                This library is great because it provides really good looking visual data displays and is quite easy to work with.
+                This library provides really good looking visual data displays and is quite easy to work with.
                 Of course it requires its input data be formatted a certain way, so another round of Python goes to work on the stored data we parsed
                 from the Steam API and gets it ready to be passed to Charts.js as label names, graph data points, colors, etc.<br><br>
                 Finally, the data is ready to be displayed.  Flask makes this process quite easy - a basic template is set up in
-                HTML that allows variables to be passed in from the server.  The variables come from all the data processing with Python.  The
+                HTML that allows variables to be passed in from the server.  The variables come from all the data processing done earlier with Python.  The
                 data is passed to the client and everything is styled with CSS for the very final step.
             </p>
 
