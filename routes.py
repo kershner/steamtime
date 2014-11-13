@@ -26,7 +26,7 @@ def results():
     def get_steam_api_key():
         path = os.path.dirname(os.path.realpath(__file__))
         filepath = os.path.abspath(os.path.join(path, os.pardir))
-        file_object = filepath + '/steamtime_config.txt'
+        file_object = filepath + '/steamtime_api_key.txt'
 
         with open(file_object, 'r') as file:
             data = file.read()
