@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8" name="viewport" content="initial-scale=1">
+
+    <!-- CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/static/style.css"/>
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400' rel='stylesheet' type='text/css'>
+
+    <!-- JS -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/Chart.min.js"></script>
+    <script src="/static/js/steamtime.js"></script>
+
+    <link rel="icon" type="image/png" href="/static/images/favicon.ico">
+
+    <title>SteamTime - {{ title }}</title>
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+</body>
+
+<script>
+$(document).ready(function(){
+    {% if donut_data_10 %}
+        {% if two_weeks == "privacy" %}
+            var donutData_2weeks = 0;
+            var lineData_2weeks = 0;
+            var barData_2weeks = 0;
+        {% else %}
+            var donutData_2weeks = {{ donut_data_2weeks[0]|safe }};
+            var lineData_2weeks = {{ line_data_2weeks|safe }};
+            var barData_2weeks = {{ bar_data_2weeks|safe }};
+        {% endif %}
+
+        var donutData_10 = {{ donut_data_10[0]|safe }};
+        var lineData_10 = {{ line_data_10|safe }};
+        var barData_10 = {{ bar_data_10|safe }};
+
+        var donutData_20 = {{ donut_data_20[0]|safe }};
+        var lineData_20 = {{ line_data_20|safe }};
+        var barData_20 = {{ bar_data_20|safe }};
+
+        var gen_stat_charts1 = {{ stats[1][0][0]|safe }};
+        var gen_stat_charts2 = {{ stats[1][0][1]|safe }};
+        var breakdown_chart = {{ stats[0]["breakdown"]["chart_data"]|safe }};
+        showStats(gen_stat_charts1, gen_stat_charts2, breakdown_chart);
+
+        var parameters = [
+            donutData_2weeks, donutData_10, donutData_20,
+            lineData_2weeks, lineData_10, lineData_20, barData_2weeks,
+            barData_10, barData_20
+            ]
+
+        {% if two_weeks == "privacy" or friends == "private" %}
+            privacyNotice();
+        {% endif %}
+
+        if (donutData_2weeks === 0) {
+            steamtimeResults(parameters, "privacy");
+        } else {
+            steamtimeResults(parameters);
+        }
+    {% endif %}
+
+    steamtime();
+});
+</script>
+
+</html>
