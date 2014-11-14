@@ -3,11 +3,11 @@
 // Calls functions for the /home page
 function steamtime() {
 	messageExists();
-    showForm();
-    showAbout();
-    showFindID();
-    closeFindID();
-    closeAbout();
+	showForm();
+	showAbout();
+	showFindID();
+	closeFindID();
+	closeAbout();
 	loading();
 	dontHave();
 }
@@ -252,7 +252,7 @@ function dimmer() {
 	setTimeout(function() {
 		$("#text1").fadeOut(1);
 		$("#text2").fadeIn("slow");
-	}, 14000);
+	}, 18000);
 }
 
 function loading() {

@@ -4,6 +4,7 @@ import os
 import random
 import urllib2
 import json
+import itertools
 from steamtime import app
 
 
@@ -22,6 +23,11 @@ def steamtime():
 def results():
     form = SteamTime()
 
+    # Split data into fixed-length chunks
+    def grouper(n, iterable, fillvalue=''):
+        args = [iter(iterable)] * n
+        return itertools.izip_longest(fillvalue=fillvalue, *args)
+
     # Grab API key from hidden file
     def get_steam_api_key():
         path = os.path.dirname(os.path.realpath(__file__))
@@ -31,6 +37,27 @@ def results():
         with open(file_object, 'r') as file:
             data = file.read()
             return data[10:]
+
+    # Testing if user has input a vanity URL or 64-bit SteamID
+    def test_user_input(userinput):
+        try:
+            # Testing if user has input a 64-bit numerical SteamID or vanity url
+            if len(userinput) == 17 and not userinput[0].isalpha():
+                steam_id = userinput
+                url_string = '%s?key=%s&steamids=%s' % (API_PLAYER, API_KEY, steam_id)
+                json_data = json.loads(urllib2.urlopen(url_string).read())
+                display_name = json_data['response']['players'][0]['personaname']
+                return [steam_id, display_name]
+            else:
+                url_string = '%s?key=%s&vanityurl=%s' % (API_URL_STEAMID, API_KEY, userinput)
+                steam_id = json.loads(urllib2.urlopen(url_string).read())['response']['steamid']
+                display_name = userinput
+                return [steam_id, display_name]
+        except (KeyError, IndexError):
+            return render_template('/home.html',
+                                   form=form,
+                                   message='Invalid profile name or SteamID, please try again.',
+                                   title='Visualize Time Spent In Your Steam Library')
 
     # Function to organize games into a list with desired bits of data
     def parse_data(data, playtime_type, number_of_results, recent, steamid):
@@ -177,19 +204,25 @@ def results():
             for entry in data['friendslist']['friends']:
                 friends.append(entry['steamid'])
 
-            friends_string = ','.join(friends)
+            # Use grouper to split into sublists because the web API only accepts 100 friends at a time
+            full_friends_list = grouper(100, friends)
 
             friends_new = []
-            raw_data = urllib2.urlopen('%s?key=%s&steamids=%s' % (API_PLAYER, API_KEY, friends_string))
-            data = json.loads(raw_data.read())
-            for entry in data['response']['players']:
-                steamid = entry['steamid']
-                name = entry['personaname']
-                avatar = entry['avatarmedium']
-                friends_new.append([steamid, name, avatar])
+
+            for item in full_friends_list:
+                item_list = list(item)
+                friends_string = ','.join(item_list)
+                raw_data = urllib2.urlopen('%s?key=%s&steamids=%s' % (API_PLAYER, API_KEY, friends_string))
+                data = json.loads(raw_data.read())
+                for entry in data['response']['players']:
+                    steamid = entry['steamid']
+                    name = entry['personaname']
+                    avatar = entry['avatarmedium']
+                    friends_new.append([steamid, name, avatar])
 
             return [friends_new, len(friends_new)]
         except urllib2.HTTPError:
+            print 'get_friends has returned private'
             return 'private'
 
     # Function to pull out stats for Statistics page
@@ -202,7 +235,12 @@ def results():
             else:
                 avg_list.append(float(game[2]))
                 least_played.append(game)
-        avg_game_time = sum(avg_list) / float(len(avg_list))
+        # Will get a divide by zero error if no games in avg_list
+        if not avg_list:
+            avg_game_time = 0
+        else:
+            avg_game_time = sum(avg_list) / float(len(avg_list))
+
         total_games_all = len(all[0])
 
         total_hours_all = 0.0
@@ -222,7 +260,12 @@ def results():
 
         total_games_unplayed = len(shame)
         most_played = [all[0][0][1], all[0][0][2], all[0][0][3], all[0][0][5]]
-        least_played = [least_played[-1][1], least_played[-1][2], least_played[-1][3], least_played[-1][5]]
+
+        # Handling edge case of a user only having 1 game
+        if least_played:
+            least_played = [least_played[-1][1], least_played[-1][2], least_played[-1][3], least_played[-1][5]]
+        else:
+            least_played = ['N/A', 'N/A', 'N/A', 'N/A']
 
         colors = [random_color(), random_color(), random_color(), random_color()]
         dataset1 = '[{ value: %s, color: "%s", highlight: "#3FADFB", label: "%s"}, ' \
@@ -290,6 +333,17 @@ def results():
         else:
             diverse = ''
             focused = ''
+
+        # Returning an empty dictionary if no distinctions, so it is not rendered in template
+        if not nerd_alert:
+            if not super_nerd_alert:
+                if not hyper_nerd_alert:
+                    if not completionist:
+                        if not dedication:
+                            if not diverse:
+                                if not focused:
+                                    distinctions = {}
+                                    return distinctions
 
         distinctions = {
             'nerd_alert': nerd_alert,
@@ -371,19 +425,10 @@ def results():
                                    form=form,
                                    title='Visualize Time Spent In Your Steam Library')
         else:
-            user_input = form.steamid.data
-
+            # Return to /home and display error if the connection times out
             try:
-                # Testing if user has input a 64-bit numerical SteamID or vanity url
-                if len(user_input) == 17 and not user_input[0].isalpha():
-                    steam_id = user_input
-                    url_string = '%s?key=%s&steamids=%s' % (API_PLAYER, API_KEY, steam_id)
-                    json_data = json.loads(urllib2.urlopen(url_string).read())
-                    display_name = json_data['response']['players'][0]['personaname']
-                else:
-                    url_string = '%s?key=%s&vanityurl=%s' % (API_URL_STEAMID, API_KEY, user_input)
-                    steam_id = json.loads(urllib2.urlopen(url_string).read())['response']['steamid']
-                    display_name = user_input
+                steam_id = test_user_input(form.steamid.data)[0]
+                display_name = test_user_input(form.steamid.data)[1]
 
                 # Performing the two main API calls
                 api_call_all = urllib2.urlopen('%s?key=%s&steamid=%s&format=json&include_appinfo=1' %
@@ -447,13 +492,6 @@ def results():
                 stats = statistics(all_all, two_weeks, shame_list)
 
                 distinctions = get_distinctions(all_all, two_weeks, stats)
-                print distinctions
-
-            except (KeyError, IndexError):
-                return render_template('/home.html',
-                                       form=form,
-                                       message='Invalid profile name or SteamID, please try again.',
-                                       title='Visualize Time Spent In Your Steam Library')
             except urllib2.URLError:
                 return render_template('/home.html',
                                        form=form,

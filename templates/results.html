@@ -242,7 +242,7 @@
                         <hr>
 
                         <div id="hours-breakdown-legend" class="blue-gradient-circular shadow">
-                            <h3>Games With Hours</h3>
+                            <span id="breakdown-legend-title">Games With Hours</span>
                             <div id="breakdown-legend-labels">
                                 <p>
                                     0.1 - 5:<br>
@@ -366,53 +366,57 @@
 
                         <div class="game-stats-row">
                             <div id="most" class="game-stats-div left blue-gradient-circular">
-                                <h1 class="game-stats-div-title">Most Played Game</h1>
+                                <span class="game-stats-div-title">Most Played Game</span>
 
                                 <br>
                                 <br>
 
                                 <a href="{{ stats[0]['most_played'][3] }}"><img src="{{ stats[0]['most_played'][2] }}" class="animate glow"></a><br>
-                                <h2>{{ stats[0]['most_played'][0] }}</h2>
+                                <span class="game-stats-div-name">{{ stats[0]['most_played'][0] }}</span>
                                 <p>{{ stats[0]['most_played'][1] }} hours played</p>
                             </div>
 
+                            {% if not stats[0]['least_played'][3] == 'N/A' %}
                             <div id="least" class="game-stats-div right blue-gradient-circular">
-                                <h1 class="game-stats-div-title">Least Played Game</h1>
+                                <span class="game-stats-div-title">Least Played Game</span>
 
                                 <br>
                                 <br>
 
                                 <a href="{{ stats[0]['least_played'][3] }}"><img src="{{ stats[0]['least_played'][2] }}" class="animate glow"></a><br>
-                                <h2>{{ stats[0]['least_played'][0] }}</h2>
+                                <span class="game-stats-div-name">{{ stats[0]['least_played'][0] }}</span>
                                 <p>{{ stats[0]['least_played'][1] }} hours played</p>
                             </div>
+                            {% endif %}
                         </div>
 
                         {% if two_weeks != "privacy" %}
                         <div class="game-stats-row">
                             <div class="game-stats-div left blue-gradient-circular">
-                                <h1 class="game-stats-div-title">Most Played Game</h1>
+                                <span class="game-stats-div-title">Most Played Game</span>
                                 <span class="smaller-title">Last Two Weeks</span>
 
                                 <br>
                                 <br>
 
                                 <a href="{{ stats[0]['most_played_current'][3] }}"><img src="{{ stats[0]['most_played_current'][2] }}" class="animate glow"></a><br>
-                                <h2>{{ stats[0]['most_played_current'][0] }}</h2>
+                                <span class="game-stats-div-name">{{ stats[0]['most_played_current'][0] }}</span>
                                 <p>{{ stats[0]['most_played_current'][1] }} hours played</p>
                             </div>
 
+                            {% if not stats[0]['most_played_current'] == stats[0]['least_played_current'] %}
                             <div class="game-stats-div right blue-gradient-circular">
-                                <h1 class="game-stats-div-title">Least Played Game</h1>
+                                <span class="game-stats-div-title">Least Played Game</span>
                                 <span class="smaller-title">Last Two Weeks</span>
 
                                 <br>
                                 <br>
 
                                 <a href="{{ stats[0]['least_played_current'][3] }}"><img src="{{ stats[0]['least_played_current'][2] }}" class="animate glow"></a><br>
-                                <h2>{{ stats[0]['least_played_current'][0] }}</h2>
+                                <span class="game-stats-div-name">{{ stats[0]['least_played_current'][0] }}</span>
                                 <p>{{ stats[0]['least_played_current'][1] }} hours played</p>
                             </div>
+                            {% endif %}
                         </div>
                         {% endif %}
                     </div>
@@ -936,7 +940,7 @@
             </div>
 
             <div id="text1" class="extra-loading-text hidden">This is taking longer than expected...</div>
-            <div id="text2" class="extra-loading-text hidden">The API is <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=steam%20web%20api%20slow" class="animate">notoriously slow</a> and will likely time out, please try again!</div>
+            <div id="text2" class="extra-loading-text hidden">The API is <a href="https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=steam%20web%20api%20slow" class="animate">notoriously slow</a> and will possibly time out, please try again!</div>
         </div>
     </div>
 
