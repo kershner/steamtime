@@ -7,7 +7,7 @@
 
     <div id="hidden-menu" class="blue-gradient-circular">
         <a href="{{ profile_url }}"><img src="{{ user_image_icon }}" class="animate glow"></a>
-        <p class="green no-shadow">{{ display_name }}</p>
+        <p class="green shadow">{{ display_name }}</p>
 
         <div id="back-to-top">
             <a href="/"><h2 id="hidden-logo"><span class="white">Steam</span><span class="dark-blue no-shadow">Time</span></h2></a>
@@ -278,42 +278,6 @@
                         <hr>
 
                         <ul class="rig columns-2">
-                        {% if distinctions['hyper_nerd_alert'] %}
-                        <li class="distinction green-gradient">
-                            <span class="distinction-title">
-                                Hyper Nerd Alert
-                                <span class="distinction-description">Games with Over 500 hours</span>
-                            </span>
-                            {% for entry in distinctions['hyper_nerd_alert'] %}
-                                <a href="{{ entry[1] }}"><img src="{{ entry[0] }}" class="glow animate"></a>
-                            {% endfor %}
-                        </li>
-                        {% endif %}
-
-                        {% if distinctions['super_nerd_alert'] %}
-                        <li class="distinction green-gradient">
-                            <span class="distinction-title">
-                                Super Nerd Alert
-                                <span class="distinction-description">Games with Over 100 hours</span>
-                            </span>
-                            {% for entry in distinctions['super_nerd_alert'] %}
-                                <a href="{{ entry[1] }}"><img src="{{ entry[0] }}" class="glow animate"></a>
-                            {% endfor %}
-                        </li>
-                        {% endif %}
-
-                        {% if distinctions['nerd_alert'] %}
-                        <li class="distinction green-gradient">
-                            <span class="distinction-title">
-                                Nerd Alert
-                                <span class="distinction-description">Games with Over 50 hours</span>
-                            </span>
-                            {% for entry in distinctions['nerd_alert'] %}
-                                <a href="{{ entry[1] }}"><img src="{{ entry[0] }}" class="glow animate"></a>
-                            {% endfor %}
-                        </li>
-                        {% endif %}
-
                         {% if distinctions['completionist'] %}
                         <li class="distinction green-gradient">
                             <span class="distinction-title">
@@ -354,6 +318,42 @@
                                 <span class="distinction-text">{{ distinctions['focused'] }} game</span>
                             </li>
                             {% endif %}
+                        {% endif %}
+
+                        {% if distinctions['hyper_nerd_alert'] %}
+                        <li class="distinction green-gradient">
+                            <span class="distinction-title">
+                                Hyper Nerd Alert
+                                <span class="distinction-description">Games with Over 500 hours</span>
+                            </span>
+                            {% for entry in distinctions['hyper_nerd_alert'] %}
+                                <a href="{{ entry[1] }}"><img src="{{ entry[0] }}" class="glow animate"></a>
+                            {% endfor %}
+                        </li>
+                        {% endif %}
+
+                        {% if distinctions['super_nerd_alert'] %}
+                        <li class="distinction green-gradient">
+                            <span class="distinction-title">
+                                Super Nerd Alert
+                                <span class="distinction-description">Games with Over 100 hours</span>
+                            </span>
+                            {% for entry in distinctions['super_nerd_alert'] %}
+                                <a href="{{ entry[1] }}"><img src="{{ entry[0] }}" class="glow animate"></a>
+                            {% endfor %}
+                        </li>
+                        {% endif %}
+
+                        {% if distinctions['nerd_alert'] %}
+                        <li class="distinction green-gradient">
+                            <span class="distinction-title">
+                                Nerd Alert
+                                <span class="distinction-description">Games with Over 50 hours</span>
+                            </span>
+                            {% for entry in distinctions['nerd_alert'] %}
+                                <a href="{{ entry[1] }}"><img src="{{ entry[0] }}" class="glow animate"></a>
+                            {% endfor %}
+                        </li>
                         {% endif %}
                         </ul>
                     </div>

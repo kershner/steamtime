@@ -1,7 +1,7 @@
 body, html {
 	margin: 0;
 	padding: 0;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	color: black;
 	background: url(../static/images/denim.png);
 }
@@ -66,20 +66,18 @@ hr {
 
 /* Generic rig style for grids */
 ul.rig {
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
 	list-style: none;
 	font-size: 0px;
-	padding: 0;
-	min-width: 10px;
-	margin-top: 15px;
-	margin-left: -1%;
-	margin-right: 2.5%;
 }
 
 li {
 	text-align: center;
 	display: inline-block;
 	padding: 10px;
-	margin: 0 0 -2.5% 2.5%;
+	margin: 0 0 2.5% 2.5%;
 	vertical-align: top;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -207,7 +205,7 @@ ul.rig.columns-2 li {
 	position: relative;
 	margin: 0 auto;
 	color: white;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 35px;
 	text-align: center;
 	text-shadow: none;
@@ -282,7 +280,7 @@ ul.rig.columns-2 li {
 
 #down {
 	position: absolute;
-	top: 25px;
+	top: 26px;
 	left: 10px;
 	color: white;
 	font-size: 28px;
@@ -307,7 +305,7 @@ form a, form span {
 
 #pipe {
 	margin: 0 8px;
-	bottom: 11px;
+	bottom: 10px;
 	font-size: 25px;
 }
 
@@ -340,7 +338,7 @@ input[type=text] {
 }
 
 .submit {
-	margin-top: 25px;
+	margin-top: 5px;
 	height: 75px;
 	width: 300px;
 	border-radius: 5px;
@@ -350,7 +348,7 @@ input[type=text] {
     overflow: hidden;
     outline: none;
 	color: white;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 42px;
 }
 
@@ -376,11 +374,10 @@ input[type=text] {
 	height: 830px;
 	width: 500px;
 	background-color: #012f51;
-	border-radius: 5px;
-	-webkit-box-shadow: 0 0 10px #000;
-        box-shadow: 0 0 10px #000;
+	-webkit-box-shadow: 0 0 3px #000;
+        box-shadow: 0 0 6px #000;
 	color: white;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	overflow: auto;
 }
 
@@ -456,7 +453,7 @@ input[type=text] {
         box-shadow: 0 0 10px #000;
 	border: 2px solid white;
 	color: white;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 }
 
 #find-id:active {
@@ -531,7 +528,7 @@ input[type=text] {
 	margin: 5px 0;
 	bottom: 8px;
 	left: 5px;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 24px;
 }
 
@@ -701,10 +698,10 @@ input[type=text] {
 	background-image: -webkit-gradient(radial, center center, 0, center center, 505, color-stop(0, #2394E4), color-stop(1, #1778BD));
 	background-image: -webkit-radial-gradient(center, circle farthest-corner, #2394E4 0%, #1778BD 100%);
 	background-image: radial-gradient(circle farthest-corner at center, #2394E4 0%, #1778BD 100%);
-	border-radius: 5px;
+	border-radius: 5px 5px 0 0;
 	box-shadow: 1px 1px 3px #000;
 	color: white;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	text-shadow: 1px 1px 2px #000;
 }
 
@@ -784,7 +781,7 @@ input[type=text] {
 /* Div containing # of games/hours */
 .statistics {
 	position: absolute;
-	bottom: -53px;
+	bottom: -57px;
 	left: -175px;
 	text-align: left;
 	color: white;
@@ -1030,7 +1027,7 @@ input[type=text] {
 	bottom: 15px;
 	left: 6px;
 	margin: 0;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 18px;
 }
 
@@ -1042,7 +1039,7 @@ input[type=text] {
 
 .extra-links {
 	position: absolute;
-	left: 12px;
+	left: 14px;
 	bottom: 130px;
 	height: 20px;
 	padding: 5px;
@@ -1128,11 +1125,16 @@ input[type=text] {
 	text-shadow: 1px 1px .5px #000;
 }
 
+#shame-grid {
+	margin-right: 2.5%;
+	margin-top: 25px;
+}
+
 /* Style for number of titles */
 .shame-total {
 	margin: 0;
 	margin-bottom: 25px;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 32px;
 	color: white;
 	text-shadow: 1px 1px .5px #000;
@@ -1161,7 +1163,7 @@ input[type=text] {
 
 .grid-name {
 	color: white;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 20px;
 	text-shadow: 1px 1px .5px #000;
 }
@@ -1173,7 +1175,7 @@ input[type=text] {
 }
 
 .grid-hours {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 15px;
 	color: white;
 	text-shadow: 1px 1px .5px #000;
@@ -1196,7 +1198,7 @@ input[type=text] {
 }
 
 #friends-grid {
-	margin: 0;
+	margin-right: 2.5%;
 }
 
 /* Friends grid li element styles */
@@ -1550,7 +1552,6 @@ input[type=text] {
 	min-height: 140px;
 	width: 275px;
 	box-shadow: 2px 2px 5px #000;
-	border-radius: 5px;
 	text-align: center;
 	color: white;
 	text-shadow: 1px 1px .5px #000;
@@ -1571,7 +1572,7 @@ input[type=text] {
 	display: block;
 	position: relative;
 	margin: 0;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 14px;
 	color: white;
 }
@@ -1614,10 +1615,9 @@ input[type=text] {
 	width: 400px;
 	height: 150px;
 	color: white;
-	-moz-box-shadow: 0px 0px 19px #000000;
-	-webkit-box-shadow: 0px 0px 19px #000000;
+	-moz-box-shadow: 0px 0px 7px #000000;
+	-webkit-box-shadow: 0px 0px 7px #000000;
 	box-shadow: 0px 0px 19px #000000;
-	border-radius: 5px;
 }
 
 #loading:active, #privacy-alert:active {
