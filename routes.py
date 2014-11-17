@@ -18,6 +18,7 @@ def steamtime():
                            form=form,
                            title='Visualize Time Spent In Your Steam Library')
 
+
 @app.route('/results', methods=['GET', 'POST'])
 def results():
     form = SteamTime()
