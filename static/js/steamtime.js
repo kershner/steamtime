@@ -332,6 +332,9 @@ function rangeSelection(data_array) {
 function showStats(data1, data2, breakdownData) {
 	$("#stats-tab").click(function() {
 		displayElements("#readout-stats", "#stats");
+		var masonry = new Masonry("#distinctions-grid", {
+				itemSelector: ".distinction"
+            });
 		options = {animationSteps: 70, animationEasing: "easeOutExpo"};
 		options2 = {scaleFontColor: "#FFFFFF", scaleGridLineColor : "#FFFFFF"};
 		var ctx1 = $("#gen_stat_charts1").get(0).getContext("2d");

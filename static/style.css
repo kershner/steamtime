@@ -709,7 +709,7 @@ input[type=text] {
 	position: absolute;
 	z-index: 20;
 	top: -20px;
-	right: 10px;
+	right: 15px;
 	text-shadow: .5px .5px .5px #000;
 	color: #00f887;
 }
@@ -763,8 +763,8 @@ input[type=text] {
 }
 
 /* Extra positioning/font size for larger titles */
-.readout-boost {
-	top: -200px;
+.readout-boost {	
+	top: -180px;
 	font-size: 36px;
 }
 
@@ -1546,7 +1546,7 @@ input[type=text] {
 .distinction {
 	position: relative;
 	display: inline-block;
-	margin: 10px 5px;
+	margin: 5px;
 	padding: 5px;
 	padding-bottom: 15px;
 	min-height: 140px;
