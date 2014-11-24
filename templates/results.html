@@ -1,7 +1,7 @@
 {% extends "/base.html" %}
 {% block content %}
     <div id="header" class="hidden">
-        <a href="/"><h1><span class="white animate">Steam</span><span class="blue animate">Time</span></h1></a>
+        <a href="/"><h1 id="results-big-logo"><span class="white animate">Steam</span><span class="blue animate">Time</span></h1></a>
         <a href="/"><p class="white animate">VISUALIZE TIME SPENT IN YOUR STEAM LIBRARY</p></a>
     </div>
 
@@ -323,7 +323,7 @@
                             {% if distinctions['hyper_nerd_alert'] %}
                             <div class="distinction green-gradient">
                                 <span class="distinction-title">
-                                    Hyper Nerd Alert
+                                    Basement Lord
                                     <span class="distinction-description">Games with Over 500 hours</span>
                                 </span>
                                 {% for entry in distinctions['hyper_nerd_alert'] %}

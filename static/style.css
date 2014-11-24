@@ -64,6 +64,11 @@ hr {
 	box-shadow: 0px 0px 20px 0px #fff;
 }
 
+.text-glow {
+	text-shadow: 0 0 10px #FFFFFF;
+}	
+
+
 /* Generic rig style for grids */
 ul.rig {
 	position: relative;
@@ -363,6 +368,15 @@ input[type=text] {
 /* ********** */
 /* About Div */
 /* ********** */
+#about-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 24;
+	height: 100%;
+	width: 100%;
+}
+
 #about-content {
 	display: none;
 	position: fixed;
@@ -585,36 +599,37 @@ input[type=text] {
 /* Big logo on Results page */
 #header {
 	position: relative;
-	top: -20px;
+	margin: 0 auto;
+	margin-bottom: 15px;
 	height: 100px;
-	width: 450px;
-}
-
-#header:hover > a > p {
-	border-bottom: 2px solid white;
+	width: 800px;
+	top: -15px;	
+	text-align: center;	
+	text-shadow: 1px 1px .5px #000;	
 }
 
 #header h1 {
+	position: relative;
+	margin: 0 auto;
+	width: 450px;
 	font-size: 80px;
 	color: #FCBC00;
-	margin: 5px 10px;
 	font-family: 'Open Sans', sans-serif;
-	text-shadow: 1px 1px 1px #000;
 }
 
 #header p {
-	position: absolute;
-	top: 75px;
-	left: 50px;
+	position: relative;
+	margin: 0 auto;
+	width: 425px;
+	bottom: 15px;	
 	color: white;
-	text-shadow: 1px 1px .5px #000;
 }
 
 /* Styles for search bar on results page */
 #search-select {
 	position: relative;
 	z-index: 25;
-	margin: 10px auto;
+	margin: 0 auto;
 	padding: 5px;
 	top: 0;
 	height: 35px;

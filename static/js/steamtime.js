@@ -26,6 +26,7 @@ function steamtimeResults(data_array, privacy) {
 	tabSelect();
 	optionsSelect();
 	tooltips();
+	logoGlow();
 	if (privacy === undefined) {
 		initialSelections(data_array);		
 	}
@@ -60,6 +61,15 @@ function tooltips() {
 	}, function () {
 		clearTimeout(timer);
 		$("#bar-tip").fadeOut("fast");		
+	});
+}
+
+// Hover effect for logo on results page
+function logoGlow() {
+	$("#header").hover(function() {
+		$("#results-big-logo").addClass("text-glow");
+	}, function() {
+		$("#results-big-logo").removeClass("text-glow");
 	});
 }
 
@@ -187,12 +197,18 @@ function showAbout() {
 	$("#about").click(function() {
 		$("#about-content").draggable();
 		$("#about-content").fadeIn("fast");
+		$("#about-wrapper").fadeIn("fast");
 	});
 }
 
 function closeAbout() {
 	$("#close").click(function() {
 		$("#about-content").fadeOut("fast");
+		$("#about-wrapper").fadeOut("fast");
+	});
+	$("#about-wrapper").click(function() {
+		$("#about-content").fadeOut("fast");
+		$("#about-wrapper").fadeOut("fast");
 	});
 }
 
